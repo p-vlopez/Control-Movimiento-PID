@@ -216,7 +216,7 @@ while True:
     
     if coeffs1['a'] == 0 and coeffs2['a'] == 0:
         acum +=1
-        if acum > 50:
+        if acum > 70:
             print('\nCarriles perdidos de vista\n')
             rob.stopMotors()
             break
@@ -224,38 +224,38 @@ while True:
         
     #CONTROL DE VELOCIDAD
 
-    if coeffs1['a'] == 0 and coeffs1['b'] == 0 and coeffs1['c'] == 0:
+    if coeffs1['a'] == 0:
         #acum = 0
         print(coeffs1)
         print('\ncarril izquierdo perdido\n')
         print('\nDebo girar a la derecha\n')
-        #rob.moveWheels(vel , vel + 15)
-        #x_medio = 
+        rob.moveWheels(vel , vel + 15)
         
-    if coeffs2['a'] == 0 and coeffs2['b'] == 0 and coeffs2['c'] == 0:
+        
+    if coeffs2['a'] == 0:
         #acum = 0
         print(coeffs2)
         print('\ncarril derecho perdido\n')
         print('\nDebo girar a la izquierda\n')
-        #rob.moveWheels(vel + 15, vel  )
+        rob.moveWheels(vel + 15, vel  )
      
-    if coeffs1['a'] != 0 and coeffs1['b'] != 0 and coeffs1['c'] != 0 and coeffs2['a'] != 0 and coeffs2['b'] != 0 and coeffs2['c'] != 0:
+    if coeffs1['a'] != 0 and coeffs2['a'] != 0:
         print('Carriles detectados')
         #acum = 0
-        #rob.moveWheels(vel,vel)
+        rob.moveWheels(vel,vel)
     
         if ep > rang:
-            #rob.moveWheels(vel+incr,vel)
+            rob.moveWheels(vel+incr,vel)
             print('TURN TO THE LEFT\n')
             print(f"\nRight wheel speed --> {text}\n")
             vel_right = vel +incr
         elif ep < -rang:
-            #rob.moveWheels(vel,vel+incr)
+            rob.moveWheels(vel,vel+incr)
             print('TURN TO THE RIGHT\n')
             print(f"\nLeft wheel speed --> {text}\n")
             vel_left = vel + incr
         else:
-            #rob.moveWheels(vel,vel)
+            rob.moveWheels(vel,vel)
             print('\nSTAY ON COURSE\n')
     
               
@@ -263,8 +263,8 @@ while True:
     cv2.namedWindow('Running Control')
     if draw:
         #Muestra por pantalla lo que ve el método
-        #cv2.putText(frame,f"Right wheel speed --> {vel_right}",(5,20),fontFace= cv2.FONT_HERSHEY_COMPLEX_SMALL, fontScale=0.7, color = (0,0,0))
-        #cv2.putText(frame,f"Left wheel speed  --> {vel_left}",(5,40),fontFace= cv2.FONT_HERSHEY_COMPLEX_SMALL, fontScale=0.7, color = (0,0,0))
+        cv2.putText(frame,f"Right wheel speed --> {vel_right}",(5,20),fontFace= cv2.FONT_HERSHEY_COMPLEX_SMALL, fontScale=0.7, color = (0,0,0))
+        cv2.putText(frame,f"Left wheel speed  --> {vel_left}",(5,40),fontFace= cv2.FONT_HERSHEY_COMPLEX_SMALL, fontScale=0.7, color = (0,0,0))
         cv2.imshow('Smarphone Camera', frame)
         cv2.imwrite('/home/pol/Escritorio/curva_vel_top'+str(vel)+'.jpg', frame)
            
